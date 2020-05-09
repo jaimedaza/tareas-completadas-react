@@ -49,22 +49,35 @@ class App extends Component {
 
   doneTask = (id) => {
 
-    this.setState(prevState => {
+    const newState = this.state.tasks.map(task => {
+      if (task.id === id) {
+        task.done = !task.done
+        return task
+      }
+      return task
+    })
+    this.setState({
+      tasks: newState
+    })
 
-      const newState = {...prevState};
+    //OTRA SOLUCIÓN
+    /* this.setState(prevState => {
 
-      newState.tasks = newState.tasks.map(item => {
-        if(item.id === id){
-          return {
-            ...item,
-            done: !item.done
-          };
-        }else{
-          return item
-        }
-      });
-      return newState
-    });    
+        const newState = {...prevState};
+  
+        newState.tasks = newState.tasks.map(item => {
+          if(item.id === id){
+            return {
+              ...item,
+              done: !item.done
+            };
+          }else{
+            return item
+          }
+        });
+        return newState
+      });    */
+     
   };  
 
   render() {
